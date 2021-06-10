@@ -5,6 +5,7 @@ class TweetsController < ApplicationController
   # GET /tweets or /tweets.json
   def index
     @tweets = Tweet.all.page(params[:page])
+    @tweet = Tweet.new
   end
 
   # GET /tweets/1 or /tweets/1.json
@@ -24,6 +25,7 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
+    
 
     respond_to do |format|
       if @tweet.save
@@ -59,6 +61,8 @@ class TweetsController < ApplicationController
   end
 
   private
+
+   
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
       @tweet = Tweet.find(params[:id])
