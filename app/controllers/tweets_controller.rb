@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: %i[ show edit update destroy ]
+  before_action :set_tweet, only: %i[ show edit update destroy]
   #before_action :authenticate_user!
 
   # GET /tweets or /tweets.json
@@ -73,9 +73,18 @@ class TweetsController < ApplicationController
     redirect_to root_path
   end
 
+  def retweet
+    if current_user
+      @tweet = Tweet.find(params[:tweet_id])
+      Tweet.create(content: @tweet.content , user_id: current_user.id, twauthor: @tweet.id)
+    else
+      redirect_to new_user_session_path
+    end
+    redirect_to root_path
+  end
+
   private
 
-   
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
       @tweet = Tweet.find(params[:id])
