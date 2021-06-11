@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+gem 'acts_as_votable', '~> 0.11.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

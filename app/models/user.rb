@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :tweets, dependent: :destroy
   validates :email, presence: true, uniqueness: true
+  acts_as_voter
 
   def to_s
     username

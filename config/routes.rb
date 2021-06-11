@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  resources :likes
-  resources :tweets
+  
+  resources :tweets do
+    member do
+      put "like", to: "tweets#like"
+      put "dislike", to: "tweets#dislike"
+    end
+  end 
+  
   devise_for :users, controllers: {
   sessions: 'users/sessions',
   registrations: 'users/registrations'

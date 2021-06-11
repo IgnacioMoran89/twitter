@@ -3,6 +3,8 @@ class Tweet < ApplicationRecord
   has_many :likes, dependent: :destroy
   validates :content, presence: true
 
+  acts_as_votable
+
   def to_s
     username
   end

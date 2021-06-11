@@ -23,9 +23,24 @@
         <td><%= tweet.content %></td>
         <td><%= tweet.user.username %></td>
         <td><img src="<%= tweet.user.profile_photo %>" width="60" height="60" class="round-circle mb-2" ></td>
+        
+        <td><% if current_user.liked? tweet %>
+          <%= link_to dislike_tweet_path(tweet.id), method: :put do %>
+            <%= image_tag("like.png", :alt => "Like", height: 18, width: 20) %>
+            <%= tweet.get_likes.size %>
+          <% end %>
+          <% else %>
+            <%= link_to like_tweet_path(tweet), method: :put do %>
+                <%= image_tag("dislike.png", :alt => "Like", height: 18, width: 20) %>
+                <%= tweet.get_likes.size %>
+            <% end %>
+          <% end %></td>
+
         <td><%= link_to 'Show', tweet %></td>
-        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user_signed_in? && (tweet.user_id == current_user.id) %>
+          <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+          <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -36,8 +51,7 @@
             <%= link_to_prev_page @tweets, "Show less", class: "btn btn-dark btn-sm text-11" %>
             <%= link_to_next_page @tweets, "Show more", class:"btn btn-dark btn-sm text-11"%>
         </div>
-    </div>
+</div>
 <%#= paginate @tweets %>
 <br>
-
 

@@ -19,6 +19,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets/1/edit
   def edit
+    
   end
 
   # POST /tweets or /tweets.json
@@ -58,6 +59,18 @@ class TweetsController < ApplicationController
       format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def like
+    @tweet = Tweet.find(params[:id])
+    @tweet.liked_by current_user
+    redirect_to root_path
+  end
+  
+  def dislike
+    @tweet = Tweet.find(params[:id])
+    @tweet.disliked_by current_user
+    redirect_to root_path
   end
 
   private
