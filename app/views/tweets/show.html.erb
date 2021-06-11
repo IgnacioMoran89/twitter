@@ -1,21 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-<strong>Foto:</strong>
-<img src="<%= @tweet.user.profile_photo %>" width="60" height="60" class="rounded-circle mb-2">
-</p>
+<div class="container">
+  <p>
+  <strong>Foto:</strong>
+  <img src="<%= @tweet.user.profile_photo %>" width="60" height="60" class="rounded-circle mb-2">
+  </p>
 
-<p>
-<strong>Nombre:</strong>
-<%= @tweet.user.username %>
-</p>
+  <p>
+  <strong>Nombre:</strong>
+  <%= @tweet.user.username %>
+  </p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @tweet.content %>
-</p>
+  <p>
+    <strong>Content:</strong>
+    <%= @tweet.content %>
+  </p>
 
 
-<%= link_to 'Edit', edit_tweet_path(@tweet) %> |
+  <div class="container">
+    <p>liked by:</p>
 
-<%= link_to 'Back', tweets_path %>
+    <div class="container">
+      <div>
+        <% Like.where(tweet_id: @tweet.id).each do |photo| %>
+          <% profile_photo =  photo.user_id %>
+            <div class="d-inline-block p-2">
+              <img src="<%= tweet.user.profile_photo %>" width="60" height="60" class="round-circle mb-2" >
+            </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+  <%= link_to 'Back', tweets_path %>
