@@ -26,16 +26,16 @@
         
         <td>
         <td><% if signed_in? %> 
-            <% if current_user.liked? tweet %>
+              <% if current_user.liked? tweet %>
                 <%= link_to dislike_tweet_path(tweet.id), method: :put do %>
                   <%= image_tag("like.png", :alt => "Like", height: 18, width: 20) %>
                   <%= tweet.get_likes.size %>
-              <% end %>
+                <% end %>
               <% else %>
-                  <%= link_to like_tweet_path(tweet), method: :put do %>
-                      <%= image_tag("dislike.png", :alt => "Like", height: 18, width: 20) %>
-                      <%= tweet.get_likes.size %>
-                  <% end %>
+                <%= link_to like_tweet_path(tweet), method: :put do %>
+                  <%= image_tag("dislike.png", :alt => "Like", height: 18, width: 20) %>
+                  <%= tweet.get_likes.size %>
+                <% end %>
               <% end %>
               | <%= link_to 'Rt', tweet_retweet_path(tweet), method: :post %> 
                 <%= tweet.count_rt%>

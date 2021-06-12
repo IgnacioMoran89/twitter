@@ -20,16 +20,10 @@
   <div class="container">
     <p>liked by:</p>
 
-    <div class="container">
-      <div>
-        <% Like.where(tweet_id: @tweet.id).each do |photo| %>
-          <% profile_photo =  photo.user_id %>
-            <div class="d-inline-block p-2">
-              <img src="<%= tweet.user.profile_photo %>" width="60" height="60" class="round-circle mb-2" >
-            </div>
-        <% end %>
-      </div>
-    </div>
+    <% @tweet.votes_for.voters.each do | p | %> 
+      <img src="<%= p.profile_photo %>" width="60" height="60" class="round-circle mb-2" >
+    <% end%>
+
 
   </div>
 

@@ -55,12 +55,19 @@ class LikesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def like
+    @like = Like.find(params[:id])
+    @like.liked_by current_user
+    redirect_to root_path
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_like
       @like = Like.find(params[:id])
     end
+
+
 
     # Only allow a list of trusted parameters through.
     def like_params

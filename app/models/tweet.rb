@@ -20,6 +20,7 @@ class Tweet < ApplicationRecord
   def original_tweet
     Tweet.find(self.twauthor)
   end
-
+  
+  
   
 end
