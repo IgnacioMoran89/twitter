@@ -78,7 +78,7 @@ class TweetsController < ApplicationController
   def retweet
     if current_user
       @tweet = Tweet.find(params[:tweet_id])
-      Tweet.create(content: @tweet.content , user_id: current_user.id)
+      Tweet.create(content: @tweet.content , user_id: current_user.id, twauthor: @tweet.id)
     else
       redirect_to new_user_session_path
     end
