@@ -17,6 +17,7 @@ class Tweet < ApplicationRecord
     Tweet.where(twauthor: self.id).count
   end
 
+  # Este metodo sirve para referenciar el nombre del autor del tweet pero no logro evitar que cuando el tweet original sea borrado, se caiga la app
   #def original_tweet
       #Tweet.find(self.twauthor)
   #end
