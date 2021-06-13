@@ -18,7 +18,7 @@ class Tweet < ApplicationRecord
   end
 
   #def original_tweet
-    #Tweet.find(self.twauthor)
+      #Tweet.find(self.twauthor)
   #end
   
   
