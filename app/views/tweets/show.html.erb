@@ -1,33 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container">
-  <p>
-  <strong>Foto:</strong>
-  <img src="<%= @tweet.user.profile_photo %>" width="60" height="60" class="rounded-circle mb-2">
-  </p>
+<div class="card" style="width: 70%;">
 
-  <p>
-  <strong>Nombre:</strong>
-  <%= @tweet.user.username %>
-  </p>
-
-  <p>
-    <strong>Content:</strong>
-    <%= @tweet.content %>
-  </p>
-
-
-  <div class="container">
-    <p>liked by:</p>
-
-    <% @tweet.votes_for.voters.each do | p | %> 
-      <img src="<%= p.profile_photo %>" width="60" height="60" class="round-circle mb-2" >
-    <% end%>
-
-
-  </div>
-
-
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><img src="<%= @tweet.user.profile_photo %>" width="100" height="100" class="rounded-circle mb-2"> <strong>Tweeted By:</strong> <%= @tweet.user.username %></li>
+    <li class="list-group-item">What <strong><%= @tweet.user.username %></strong> said: <%= @tweet.content %> </li>
+    <li class="list-group-item"><strong>Liked by:</strong> <br>
+      <% @tweet.votes_for.voters.each do | p | %> 
+        <img src="<%= p.profile_photo %>" width="60" height="60" class="round-circle mb-2" >
+      <% end%> 
+    </li>
+  </ul>
 </div>
 
-  <%= link_to 'Back', tweets_path %>
+  <%= link_to 'Back', tweets_path, class: 'btn btn-dark' %>
