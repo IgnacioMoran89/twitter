@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :friends
   resources :tweets do
     post 'retweet', to: 'tweets#retweet'
     member do
