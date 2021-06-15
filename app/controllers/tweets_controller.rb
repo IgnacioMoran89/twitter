@@ -1,9 +1,11 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[ show edit update destroy]
+
   #before_action :authenticate_user!
 
   # GET /tweets or /tweets.json
   def index
+    @users = User.where.not(id: current_user&.id)
     @tweets = Tweet.all.page(params[:page])
     @tweet = Tweet.new
   end
@@ -29,7 +31,6 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
     
-
     respond_to do |format|
       if @tweet.save
         format.html { redirect_to @tweet, notice: "Tweet was successfully created." }
@@ -60,19 +61,7 @@ class TweetsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
       format.json { head :no_content }
-    end
-  end
-
-  def like
-    @tweet = Tweet.find(params[:id])
-    @tweet.liked_by current_user
-    redirect_to root_path
-  end
-  
-  def dislike
-    @tweet = Tweet.find(params[:id])
-    @tweet.disliked_by current_user
-    redirect_to root_path
+    end 
   end
 
   def retweet
