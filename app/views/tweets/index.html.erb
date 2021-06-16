@@ -32,7 +32,7 @@
               | <%= link_to 'Rt', tweet_retweet_path(tweet), method: :post %> 
                 <%= tweet.count_rt%>
                 <td><% if tweet.is_retweet?%>
-                  <p>retweeted from:</p><%= tweet.original_tweet.user.username%> </td>
+                  <p>retweeted from:</p><%= tweet.user.username%> </td>
                 <% end %></td>
           <% end %>
           <td><%= link_to time_ago_in_words(tweet.created_at),tweet %></td>
