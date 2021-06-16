@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   registrations: 'users/registrations'
   }
 
+  post '/users/:id/user_followers', to: "users#user_followers", as: "user_followers_user"
 
   
   root 'tweets#index'
