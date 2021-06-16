@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
   validates :email, presence: true, uniqueness: true
   acts_as_voter
+  
+
+  has_many :friends, dependent: :destroy
 
   def to_s
     username

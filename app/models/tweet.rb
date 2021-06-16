@@ -17,9 +17,9 @@ class Tweet < ApplicationRecord
     Tweet.where(twauthor: self.id).count
   end
 
-  def original_tweet
-    Tweet.find(self.twauthor)
-  end
+  #def original_tweet
+    #Tweet.find(self.twauthor)
+  #end
   
   
   
