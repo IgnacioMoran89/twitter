@@ -24,7 +24,7 @@ class FriendsController < ApplicationController
 
   # POST /friends or /friends.json
   def create
-    
+   
   end
 
   # PATCH/PUT /friends/1 or /friends/1.json

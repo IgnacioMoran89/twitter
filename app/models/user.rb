@@ -17,13 +17,6 @@ class User < ApplicationRecord
     username
   end
 
-  def get_followers
-    Friend.where(friend_id: self.id)
-  end
-  
-  def get_following
-    Friend.where(user_id: self.id)
-  end
 
 
 
