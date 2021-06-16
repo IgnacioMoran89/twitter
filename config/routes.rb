@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   sessions: 'users/sessions',
   registrations: 'users/registrations'
   }
+
+  post 'follow/:user_id', to: 'users#follow', as: 'users_follow'
   
   root 'tweets#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

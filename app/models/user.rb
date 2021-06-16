@@ -4,17 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   
-  has_many :likes, dependent: :destroy
-  has_many :tweets, dependent: :destroy
-  validates :email, presence: true, uniqueness: true
-  acts_as_voter
-
-  has_many :followed_users, foreign_key: :follower_id, class_name: 'Friend'
-  has_many :followees, through: :followed_users
-  has_many :following_users, foreign_key: :followee_id, class_name: 'Friend'
-  has_many :followers, through: :following_users
+  has_many :friends, dependent: :destroy
 
   def to_s
     username
   end
+
+  def users_followed
+    arr_ids = self.friends.pluck(:friend_id)
+    User.find(arr_ids)
+  end
+
+  def is_following?(user)
+    users_followed.include? (user)
+  end
+
+
 end
