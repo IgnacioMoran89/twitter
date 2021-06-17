@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :tweets, dependent: :destroy
 
-  has_many :friends, dependent: :destroy
+  has_many :friends, class_name: "Friend", dependent: :destroy
   
   validates :email, presence: true, uniqueness: true
   acts_as_voter

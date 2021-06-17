@@ -9,11 +9,18 @@ Rails.application.routes.draw do
       
     end
   end 
+
+  get 'users/show'
   
   devise_for :users, controllers: {
   sessions: 'users/sessions',
   registrations: 'users/registrations'
   }
+
+  devise_scope :user do
+    post 'follow/:id', to: 'friends#follow', as: 'follow_user'
+    delete 'follow/:id', to: 'friends#unfollow', as: 'unfollow_user'
+  end
 
 
   
