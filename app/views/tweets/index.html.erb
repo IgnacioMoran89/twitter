@@ -3,15 +3,23 @@
 <% if user_signed_in? %>
   <%= render 'form', tweet: @tweet %>
 <% end %>
-
+<div class= "row">
+    <div class= "col-md-3 offset-md-2">
+      <%= search_form_for @q do |f| %>
+        <div class= "form-group" >
+          <%= f.label :content_cont, "Buscar Tweets"%>
+          <%= f.search_field :content_cont, class: "form-control", placeholder: "Search Tweet" %>
+        </div>
+        <%= f.submit "Search", remote: true, class: "btn btn-primary" %> 
+      <% end %>
+    </div>
+</div>
 <h1 class = text-center>Tweets</h1>
-
-
 
 <table class ='table'>
 
   <tbody>
-    <% if signed_in? %>
+  
       <% @tweets.each do |tweet| %>
         <tr>
           <td><%= tweet.content %></td>
@@ -55,7 +63,7 @@
           <% end %>
         </tr>
       <% end %>
-    <% end %>
+    
   </tbody>
 </table>
 
