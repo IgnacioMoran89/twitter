@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end 
 
   get 'users/show'
+  get 'tweets/index'
+  
   
   devise_for :users, controllers: {
   sessions: 'users/sessions',

@@ -37,8 +37,8 @@ class FriendsController < ApplicationController
   end
 
   def unfollow
-      friend = Friend.find_by(friend_id: params[:id], user_id: current_user)
-      friend.destroy 
+      @friend = Friend.find_by(friend_id: params[:id], user_id: current_user)
+      @friend.destroy 
       redirect_to root_path
   end
 
@@ -57,7 +57,6 @@ class FriendsController < ApplicationController
 
   # DELETE /friends/1 or /friends/1.json
   def destroy
-
   end
 
   private

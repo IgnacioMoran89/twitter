@@ -3,17 +3,17 @@
 <% if user_signed_in? %>
   <%= render 'form', tweet: @tweet %>
 <% end %>
+
 <div class= "row">
     <div class= "col-md-3 offset-md-2">
-      <%= search_form_for @q do |f| %>
-        <div class= "form-group" >
-          <%= f.label :content_cont, "Buscar Tweets"%>
-          <%= f.search_field :content_cont, class: "form-control", placeholder: "Search Tweet" %>
-        </div>
-        <%= f.submit "Search", remote: true, class: "btn btn-primary" %> 
+      <%= form_tag root_path, method: :get do %>
+        <%= text_field_tag :q, nil, class:" text-11 form-control rounded-pill rounded ml-4"%>
+        <br>
+        <%= submit_tag "Buscar", class: 'btn btn-outline-success my-2 my-sm-0' %>
       <% end %>
     </div>
 </div>
+
 <h1 class = text-center>Tweets</h1>
 
 <table class ='table'>
@@ -26,6 +26,19 @@
           <td><strong>Tweeted By:</strong> <%= tweet.user.username %></td>
           <td><img src="<%= tweet.user.profile_photo %>" width="60" height="60" class="round-circle mb-2" ></td>
           <td>
+
+          <p>
+            <% content_tweet_array = tweet.content.split%>
+            <% content_tweet_array.each do |element|%>
+              <% if element.start_with?("#") %>
+                  <% element.slice!(0) %>
+                  <a href="?hashtag=<%= element %>">#<%= element %></a>
+              <% else %>
+              <%= element %>
+              <% end %>
+            <% end %>  
+          </p>  
+
           <td><% if signed_in? %> 
                 <% if current_user.liked? tweet %>
                   <%= link_to dislike_tweet_path(tweet.id), method: :put do %>
