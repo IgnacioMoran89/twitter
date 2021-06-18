@@ -56,8 +56,7 @@ class FriendsController < ApplicationController
   end
 
   # DELETE /friends/1 or /friends/1.json
-  def destroy
-  end
+
 
   private
 

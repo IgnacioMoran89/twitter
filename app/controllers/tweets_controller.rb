@@ -18,12 +18,14 @@ class TweetsController < ApplicationController
         @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
       end
     end
+  
     
-    if signed_in?
-      @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-    else
-      @tweets = Tweet.all.order("created_at DESC").page(params[:page])
-    end
+      #if signed_in?
+        #@tweets = Tweet.tweets_for_me(current_user).page(params[:page])
+      #else
+        #@tweets = Tweet.all.order("created_at DESC").page(params[:page])
+      #end
+    
 
     if params[:tweetsearch].present?
       @tweets = Tweet.search_my_tweets(params[:tweetsearch]).page(params[:page]).order("created_at DESC")

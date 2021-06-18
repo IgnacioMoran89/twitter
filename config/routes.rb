@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end 
 
   get 'users/show'
+  #post'users/show'
+  #post 'home/show'
   #get 'tweets/index'
   
   
@@ -18,10 +20,10 @@ Rails.application.routes.draw do
   registrations: 'users/registrations'
   }
 
-  devise_scope :user do
+
     post 'follow/:id', to: 'friends#follow', as: 'follow_user'
     delete 'follow/:id', to: 'friends#unfollow', as: 'unfollow_user'
-  end
+
 
 
   
