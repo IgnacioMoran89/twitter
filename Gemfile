@@ -32,7 +32,7 @@ gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 gem 'acts_as_votable', '~> 0.11.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+#gem 'ransack'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

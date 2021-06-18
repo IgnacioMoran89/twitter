@@ -4,54 +4,79 @@
   <%= render 'form', tweet: @tweet %>
 <% end %>
 
+<div class= "row">
+    <div class= "col-md-3 offset-md-2">
+      <%= form_tag root_path, method: :get do %>
+        <%= text_field_tag :q, nil, class:" text-11 form-control rounded-pill rounded ml-4"%>
+        <br>
+        <%= submit_tag "Buscar", class: 'btn btn-outline-success my-2 my-sm-0' %>
+      <% end %>
+    </div>
+</div>
+
 <h1 class = text-center>Tweets</h1>
-
-
 
 <table class ='table'>
 
   <tbody>
-    <% @tweets.each do |tweet| %>
-      <tr>
-        <td><%= tweet.content %></td>
-        <td><strong>Tweeted By:</strong> <%= tweet.user.username %></td>
-        <td><img src="<%= tweet.user.profile_photo %>" width="60" height="60" class="round-circle mb-2" ></td>
-        
-        <td>
-        <td><% if signed_in? %> 
-              <% if current_user.liked? tweet %>
-                <%= link_to dislike_tweet_path(tweet.id), method: :put do %>
-                  <%= image_tag("like.png", :alt => "Like", height: 18, width: 20) %>
-                  <%= tweet.get_likes.size %>
-                <% end %>
+  
+      <% @tweets.each do |tweet| %>
+        <tr>
+          <td><%= tweet.content %></td>
+          <td><strong>Tweeted By:</strong> <%= tweet.user.username %></td>
+          <td><img src="<%= tweet.user.profile_photo %>" width="60" height="60" class="round-circle mb-2" ></td>
+          <td>
+
+          <p>
+            <% content_tweet_array = tweet.content.split%>
+            <% content_tweet_array.each do |element|%>
+              <% if element.start_with?("#") %>
+                  <% element.slice!(0) %>
+                  <a href="?hashtag=<%= element %>">#<%= element %></a>
               <% else %>
-                <%= link_to like_tweet_path(tweet), method: :put do %>
-                  <%= image_tag("dislike.png", :alt => "Like", height: 18, width: 20) %>
-                  <%= tweet.get_likes.size %>
-                <% end %>
+              <%= element %>
               <% end %>
-              | <%= link_to 'Rt', tweet_retweet_path(tweet), method: :post %> 
-                <%= tweet.count_rt%>
+            <% end %>  
+          </p>  
 
-                <td>
-                <% if tweet.is_retweet?%>
-                    <p><%= tweet.user.username%> retweeted </p>
+          <td><% if signed_in? %> 
+                <% if current_user.liked? tweet %>
+                  <%= link_to dislike_tweet_path(tweet.id), method: :put do %>
+                    <%= image_tag("like.png", :alt => "Like", height: 18, width: 20) %>
+                    <%= tweet.get_likes.size %>
+                  <% end %>
+                <% else %>
+                  <%= link_to like_tweet_path(tweet), method: :put do %>
+                    <%= image_tag("dislike.png", :alt => "Like", height: 18, width: 20) %>
+                    <%= tweet.get_likes.size %>
+                  <% end %>
                 <% end %>
-                </td>
+                | <%= link_to 'Rt', tweet_retweet_path(tweet), method: :post %> 
+                  <%= tweet.count_rt%>
 
-                </div>
-                
+                  <td>
+                  <% if tweet.is_retweet?%>
+                      <p><%= tweet.user.username%> retweeted </p>
+                  <% end %>
+                  </td>
+
+                  </div>
+                  
+            <% end %>
+            <td><%= link_to time_ago_in_words(tweet.created_at),tweet %></td>
+
+        
+
+          </td>
+          
+          
+          <% if user_signed_in? && (tweet.user_id == current_user.id) %>
+            <td><%= link_to 'Edit', edit_tweet_path(tweet) , class: 'btn btn-warning' %></td>
+            <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
           <% end %>
-          <td><%= link_to time_ago_in_words(tweet.created_at),tweet %></td>
-        </td>
-        
-        
-        <% if user_signed_in? && (tweet.user_id == current_user.id) %>
-          <td><%= link_to 'Edit', edit_tweet_path(tweet) , class: 'btn btn-warning' %></td>
-          <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-        <% end %>
-      </tr>
-    <% end %>
+        </tr>
+      <% end %>
+    
   </tbody>
 </table>
 

@@ -5,17 +5,24 @@ Rails.application.routes.draw do
     post 'retweet', to: 'tweets#retweet'
     member do
       put "like", to: "tweets#like"
-      put "dislike", to: "tweets#dislike"
-      
+      put "dislike", to: "tweets#dislike"  
     end
   end 
+
+  get 'users/show'
+  #get 'tweets/index'
+  
   
   devise_for :users, controllers: {
   sessions: 'users/sessions',
   registrations: 'users/registrations'
   }
 
- 
+  devise_scope :user do
+    post 'follow/:id', to: 'friends#follow', as: 'follow_user'
+    delete 'follow/:id', to: 'friends#unfollow', as: 'unfollow_user'
+  end
+
 
   
   root 'tweets#index'

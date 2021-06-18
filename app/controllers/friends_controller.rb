@@ -1,5 +1,6 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ show edit update destroy ]
+  before_action :set_user
  
 
 
@@ -24,7 +25,21 @@ class FriendsController < ApplicationController
 
   # POST /friends or /friends.json
   def create
-   
+    @friend = Friend.create(user_id: current_user.id, friend_id: params[:user_id])
+    redirect_to root_path
+  end
+
+  def follow
+      @followed = User.find(params[:id])
+      @friend = Friend.new(user_id: current_user.id, friend_id: @followed.id)
+      @friend.save
+      redirect_to root_path
+  end
+
+  def unfollow
+      @friend = Friend.find_by(friend_id: params[:id], user_id: current_user)
+      @friend.destroy 
+      redirect_to root_path
   end
 
   # PATCH/PUT /friends/1 or /friends/1.json
@@ -42,12 +57,16 @@ class FriendsController < ApplicationController
 
   # DELETE /friends/1 or /friends/1.json
   def destroy
-
   end
 
   private
-   
+
     # Use callbacks to share common setup or constraints between actions.
+
+    def set_user
+      @user = User.find(current_user.id)
+    end
+
     def set_friend
       @friend = Friend.find(params[:id])
     end

@@ -1,0 +1,24 @@
+
+<table class ='table'>
+
+    <tbody>
+
+        <% @users.each do |user| %>
+            <tr>
+            <td><img src="<%= user.profile_photo %>" width="60" height="60" class="round-circle mb-2" ></td>
+            <td><%= user.username %></td>
+            <td><% user.id %></td>
+
+                
+            <td><% if current_user.friends.include? user %>
+                    <h5><%= button_to "Unfollow", unfollow_user_path(user), method: "POST" %></h5>
+                <% else %>
+                    <h5><%= button_to "Follow", follow_user_path(user), method: "POST"  %></h5>
+                <% end%>
+            </td>
+            
+                </tr>
+        <% end %>
+    </tbody>
+</table>
+
