@@ -8,24 +8,24 @@ class TweetsController < ApplicationController
   def index
     @users = User.where.not(id: current_user&.id)
     @tweet = Tweet.new
-
-    def index
-      if params[:q]
-        @tweets = Tweet.where('content LIKE ?', "%#{params[:q]}%").page(params[:page])
-        if @tweets.nil?
-          @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-        end
-      else
-        @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-      end
-    end
+    @tweets = Tweet.all.page(params[:page])
+    #def index
+      #if params[:q]
+        #@tweets = Tweet.where('content LIKE ?', "%#{params[:q]}%").page(params[:page])
+        #if @tweets.nil?
+          #@tweets = Tweet.all(current_user).page(params[:page])
+        #end
+      #else
+        #@tweets = Tweet.all(current_user).page(params[:page])
+      #end
+    #end
   
 
-      if signed_in?
-        @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-      else
-        @tweets = Tweet.all.order("created_at DESC").page(params[:page])
-      end
+      #if signed_in?
+        #@tweets = Tweet.tweets_for_me(current_user).page(params[:page])
+      #else
+        #@tweets = Tweet.all.order("created_at DESC").page(params[:page])
+      #end
     
     
 

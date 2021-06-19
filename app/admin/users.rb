@@ -18,29 +18,11 @@ ActiveAdmin.register User do
   permit_params :username, :email, :user_id
     
     
-    actions :all
-  
-    permit_params :username, :email, :user_id
 
   index do
 		column 'User name', :username
 
-    column 'Number of users followed' do |user|
-			user.friends.count
-		end
-	
-		column 'Tweets quantity' do |user|
-			user.tweets.count
-		end
-
-		column 'Likes quantity' do |user|
-			user.likes.count
-		end
 		
-    column :retweets do |user|
-        user.tweets.where.not(twauthor: id).count
-  
-    end
 
 		actions
 	end
