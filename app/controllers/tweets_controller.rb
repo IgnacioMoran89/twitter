@@ -7,23 +7,33 @@ class TweetsController < ApplicationController
   def index
     @users = User.where.not(id: current_user&.id)
     @tweet = Tweet.new
+    @tweets = Tweet.all.page(params[:page])
 
-    def index
-      if params[:q]
-        @tweets = Tweet.where('content LIKE ?', "%#{params[:q]}%").page(params[:page])
-        if @tweets.nil?
-          @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-        end
-      else
-        @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
+    if params[:q]
+      @tweets = Tweet.where('content LIKE ?', "%#{params[:q]}%").page(params[:page])
+      if @tweets.nil?
+        @tweets = Tweet.all.page(params[:page])
       end
-    end
-    
-    if signed_in?
-      @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
     else
-      @tweets = Tweet.all.order("created_at DESC").page(params[:page])
+      @tweets = Tweet.all.page(params[:page])
     end
+
+    #def index
+      #if params[:q]
+        #@tweets = Tweet.where('content LIKE ?', "%#{params[:q]}%").page(params[:page])
+        #if @tweets.nil?
+          #@tweets = Tweet.tweets_for_me(current_user).page(params[:page])
+        #end
+      #else
+        #@tweets = Tweet.tweets_for_me(current_user).page(params[:page])
+      #end
+    #end
+    
+    #if signed_in?
+      #@tweets = Tweet.tweets_for_me(current_user).page(params[:page])
+    #else
+      #@tweets = Tweet.all.order("created_at DESC").page(params[:page])
+    #end
 
     if params[:tweetsearch].present?
       @tweets = Tweet.search_my_tweets(params[:tweetsearch]).page(params[:page]).order("created_at DESC")

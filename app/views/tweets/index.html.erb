@@ -6,13 +6,14 @@
 
 <div class= "row">
     <div class= "col-md-3 offset-md-2">
-      <%= form_tag root_path, method: :get do %>
-        <%= text_field_tag :q, nil, class:" text-11 form-control rounded-pill rounded ml-4"%>
-        <br>
-        <%= submit_tag "Buscar", class: 'btn btn-outline-success my-2 my-sm-0' %>
-      <% end %>
-    </div>
+  <%= form_tag root_path, method: :get do %>
+    <%= text_field_tag :q, nil, class:" text-11 form-control rounded-pill rounded ml-4"%>
+    <br>
+    <%= submit_tag "Buscar", class: 'btn btn-outline-success my-2 my-sm-0' %>
+  <% end %>
+  </div>
 </div>
+
 
 <h1 class = text-center>Tweets</h1>
 

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end 
 
   get 'users/show'
+  post'users/show'
   #get 'tweets/index'
   
   
