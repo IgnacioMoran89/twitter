@@ -1,5 +1,6 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[ show edit update destroy]
+  
 
   #before_action :authenticate_user!
 
@@ -19,12 +20,13 @@ class TweetsController < ApplicationController
       end
     end
   
+
+      if signed_in?
+        @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
+      else
+        @tweets = Tweet.all.order("created_at DESC").page(params[:page])
+      end
     
-      #if signed_in?
-        #@tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-      #else
-        #@tweets = Tweet.all.order("created_at DESC").page(params[:page])
-      #end
     
 
     if params[:tweetsearch].present?
@@ -65,6 +67,7 @@ class TweetsController < ApplicationController
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # PATCH/PUT /tweets/1 or /tweets/1.json
@@ -114,6 +117,14 @@ class TweetsController < ApplicationController
 
   private
 
+    def set_user
+      @user = User.find(current_user.id)
+    end
+
+    def retweet
+      @tweet = Tweet.find(params[:tweet_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
       @tweet = Tweet.find(params[:id])
@@ -121,6 +132,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :twauthor, :user_id)
+      params.require(:tweet).permit(:content, :twauthor, :user_id, :tweet_id, :retweet )
     end
 end

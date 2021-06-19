@@ -1,8 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<% if user_signed_in? %>
-  <%= render 'form', tweet: @tweet %>
-<% end %>
+<h5><%= button_to "Create Tweet", new_tweet_path, class: 'btn btn-primary' %></h5>
 
 <div class= "row">
     <div class= "col-md-3 offset-md-2">

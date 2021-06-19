@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   #resources :friends
+  
   resources :tweets do
     post 'retweet', to: 'tweets#retweet'
     member do
@@ -10,20 +12,23 @@ Rails.application.routes.draw do
   end 
 
   get 'users/show'
-  #post'users/show'
+  post'users/show'
+  post'tweets/new'
+  get 'admin/users'
   #post 'home/show'
   #get 'tweets/index'
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+    post 'follow/:id', to: 'friends#follow', as: 'follow_user'
+    delete 'follow/:id', to: 'friends#unfollow', as: 'unfollow_user'
+  end 
   
   
   devise_for :users, controllers: {
   sessions: 'users/sessions',
   registrations: 'users/registrations'
   }
-
-
-    post 'follow/:id', to: 'friends#follow', as: 'follow_user'
-    delete 'follow/:id', to: 'friends#unfollow', as: 'unfollow_user'
-
 
 
   

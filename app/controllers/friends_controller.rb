@@ -1,12 +1,15 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ show edit update destroy ]
   before_action :set_user
- 
 
 
   # GET /friends or /friends.json
   def index
-    @friends = Friend.all
+  end
+
+  def create
+    @friend = Friend.create(user_id: current_user.id, friend_id: params[:user_id])
+    redirect_to root_path
   end
 
   # GET /friends/1 or /friends/1.json
@@ -24,10 +27,7 @@ class FriendsController < ApplicationController
   end
 
   # POST /friends or /friends.json
-  def create
-    @friend = Friend.create(user_id: current_user.id, friend_id: params[:user_id])
-    redirect_to root_path
-  end
+  
 
   def follow
       @followed = User.find(params[:id])
