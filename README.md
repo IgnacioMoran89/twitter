@@ -25,4 +25,4 @@ Things you may want to cover:
 
 * credenciales dashboard Activ Admin ..contraseña: password, usuario: admin@example.com
 
-*NOTA: Scope genera conflicto con la busqueda mediante barra de busqueda. Sin Scope, busqueda funciona al 100%
+* NOTA: Scope genera conflicto con la busqueda mediante barra de busqueda. Sin Scope, busqueda funciona al 100%
