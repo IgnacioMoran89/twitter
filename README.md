@@ -26,3 +26,5 @@ Things you may want to cover:
 * credenciales dashboard Activ Admin ..contraseña: password, usuario: admin@example.com
 
 * NOTA: Scope genera conflicto con la busqueda mediante barra de busqueda. Sin Scope, busqueda funciona al 100%
+
+* NOTA: activ admin funciona de manera local pero no en Heroku. Según log de heroku el modelo admin_user no existe en Base de Datos, pero si existe y funciona de manera local.
