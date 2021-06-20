@@ -3,7 +3,7 @@ class Tweet < ApplicationRecord
   has_many :likes, dependent: :destroy
   validates :content, presence: true
 
-  #scope :tweets_for_me, -> (user) { Tweet.where(user_id: user.friends.pluck(:friend_id).uniq) }
+  #SCOPE comentado para evitar conflicto con buscador
   scope :tweets_for_me, -> (user) { where(user_id: user.friends.pluck(:friend_id).push(user.id)) }
   
   acts_as_votable

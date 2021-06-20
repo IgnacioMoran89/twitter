@@ -19,18 +19,7 @@ class TweetsController < ApplicationController
       @tweets = Tweet.all.page(params[:page])
     end
     
-
-    #def index
-      #if params[:q]
-        #@tweets = Tweet.where('content LIKE ?', "%#{params[:q]}%").page(params[:page])
-        #if @tweets.nil?
-          #@tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-        #end
-      #else
-        #@tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-      #end
-    #end
-    
+    #SCOPE comentado para evitar conflicto con buscador
     if signed_in?
       @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
     else

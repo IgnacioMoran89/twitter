@@ -15,9 +15,9 @@ ActiveAdmin.register User do
       user.tweets.count
     end
 
-    #column "Likes" do |user|
+    column "Likes" do |user|
       #user.tweets.likes.count
-    #end
+    end
 
     column "Retweets" do |user|
       user.tweets.where.not(twauthor: id).count
