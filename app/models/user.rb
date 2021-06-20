@@ -12,9 +12,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   acts_as_voter
 
-  def to_s
-    username
-  end
 
 
 
