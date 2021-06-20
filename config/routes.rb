@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   #resources :friends
   resources :tweets do
     post 'retweet', to: 'tweets#retweet'
@@ -10,6 +12,7 @@ Rails.application.routes.draw do
   end 
 
   get 'users/show'
+  post'users/show'
   #get 'tweets/index'
   
   

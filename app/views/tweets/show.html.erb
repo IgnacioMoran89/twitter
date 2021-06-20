@@ -23,5 +23,8 @@
   
 
 </div>
+<% if signed_in? %>  
+  <h5><%= button_to "Find Friends", users_show_path, class: 'btn btn-primary' %></h5>
+<% end %>
 
   <%= link_to 'Back', tweets_path, class: 'btn btn-dark' %>

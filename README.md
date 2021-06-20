@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * heroku: https://twitdesflat.herokuapp.com/
+
+* credenciales dashboard Activ Admin ..contraseña: password, usuario: admin@example.com
+
+*NOTA: Scope genera conflicto con la busqueda mediante barra de busqueda. Sin Scope, busqueda funciona al 100%
