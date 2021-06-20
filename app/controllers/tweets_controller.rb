@@ -9,6 +9,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new
     @tweets = Tweet.all.page(params[:page])
 
+    
     if params[:q]
       @tweets = Tweet.where('content LIKE ?', "%#{params[:q]}%").page(params[:page])
       if @tweets.nil?
@@ -17,6 +18,7 @@ class TweetsController < ApplicationController
     else
       @tweets = Tweet.all.page(params[:page])
     end
+    
 
     #def index
       #if params[:q]
@@ -29,11 +31,11 @@ class TweetsController < ApplicationController
       #end
     #end
     
-    #if signed_in?
-      #@tweets = Tweet.tweets_for_me(current_user).page(params[:page])
-    #else
-      #@tweets = Tweet.all.order("created_at DESC").page(params[:page])
-    #end
+    if signed_in?
+      @tweets = Tweet.tweets_for_me(current_user).page(params[:page])
+    else
+      @tweets = Tweet.all.order("created_at DESC").page(params[:page])
+    end
 
     if params[:tweetsearch].present?
       @tweets = Tweet.search_my_tweets(params[:tweetsearch]).page(params[:page]).order("created_at DESC")
