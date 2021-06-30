@@ -26,7 +26,9 @@ Rails.application.routes.draw do
     delete 'follow/:id', to: 'friends#unfollow', as: 'unfollow_user'
   end
 
-
+  get '/api/news', to: 'apis#index'
+  get "/api/:date1/:date2", to: 'apis#between_dates'
+  get '/api/create', to: 'apis#create_tweet'
   
   root 'tweets#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
