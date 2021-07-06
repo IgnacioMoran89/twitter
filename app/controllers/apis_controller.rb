@@ -3,7 +3,7 @@ class ApisController < ApplicationController
     include ActionController::HttpAuthentication::Basic::ControllerMethods
     before_action :set_tweet, only: [:show, :update, :destroy]
     skip_before_action :verify_authenticity_token
-    http_basic_authenticate_with name: "user", password: "123456"
+    http_basic_authenticate_with name: "Tom Chaplin", password: "123456"
 
     def index
         array = []
@@ -22,16 +22,16 @@ class ApisController < ApplicationController
         render json: @tweets
     end
 
+    #para crear tweets desde los headers de postman
     def create_tweet
-        @tweet = Tweet.new(content: params[:content], user_id: params[:user_id])
-    
+        @tweet = Tweet.new(content: request.headers["content"], user_id: request.headers["user"])
+        
         if @tweet.save
             render json: @tweet, status: :created
         else
             render json: @tweet.errors, status: :unprocessable_entity
         end
     end
-
 
 
     def destroy

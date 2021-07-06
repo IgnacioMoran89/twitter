@@ -29,6 +29,6 @@ Things you may want to cover:
 
 * NOTA: activ admin funciona de manera local pero no en Heroku. Según log de heroku el modelo admin_user no existe en Base de Datos, pero si existe y funciona de manera local.
 
-* para basic auth  --> name: user , contraseña: 123456
+* para basic auth en postman --> name: Tom Chaplin , contraseña: 123456
 
 * formato de fecha para between_dates como http://localhost:3000/api/2021-06-20/2021-06-30
