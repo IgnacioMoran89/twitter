@@ -3,7 +3,7 @@ class ApisController < ApplicationController
     include ActionController::HttpAuthentication::Basic::ControllerMethods
     before_action :set_tweet, only: [:show, :update, :destroy]
     skip_before_action :verify_authenticity_token
-    http_basic_authenticate_with name: "Tom Chaplin", password: "123456"
+    http_basic_authenticate_with name: "Tom Chaplin", password: "123456", only: :create_tweet
 
     def index
         array = []

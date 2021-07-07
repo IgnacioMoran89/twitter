@@ -31,4 +31,4 @@ Things you may want to cover:
 
 * para basic auth en postman --> name: Tom Chaplin , contraseña: 123456
 
-* formato de fecha para between_dates como http://localhost:3000/api/2021-06-20/2021-06-30
+* formato de fecha para between_dates usar http://localhost:3000/api/2021-06-20/2021-06-30
